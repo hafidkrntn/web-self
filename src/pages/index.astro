@@ -1,11 +1,29 @@
 ---
-import Welcome from "../components/Welcome.astro";
+/**
+ * index.astro
+ * Main page combining all 3D components
+ */
 import Layout from "../layouts/Layout.astro";
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import ThreeScene from "../components/ThreeScene.astro";
+import Navigation from "../components/Navigation.astro";
+import Hero3D from "../components/Hero3D.astro";
+import ProjectCards3D from "../components/ProjectCards3D.astro";
+import SkillsOrbit from "../components/SkillsOrbit.astro";
+import Contact3D from "../components/Contact3D.astro";
 ---
 
 <Layout>
-	<Welcome />
+	<!-- 3D Background Scene -->
+	<ThreeScene />
+
+	<!-- Navigation -->
+	<Navigation />
+
+	<!-- Main Content -->
+	<main>
+		<Hero3D />
+		<ProjectCards3D />
+		<SkillsOrbit />
+		<Contact3D />
+	</main>
 </Layout>
