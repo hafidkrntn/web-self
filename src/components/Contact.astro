@@ -1,0 +1,121 @@
+---
+const socialLinks = [
+  { label: "GitHub", href: "https://github.com/hafidkrntn" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/muhamad-hafid-123958219/" },
+  { label: "X", href: "https://x.com/hakun0318" },
+];
+const year = new Date().getFullYear();
+---
+
+<section id="contact" class="contact-section">
+  <div class="contact-inner fade-in stagger-1">
+    <h2 class="contact-heading">Get in Touch</h2>
+    <p class="contact-text">
+      Whether you're building a product,<br />
+      improving an existing system,<br />
+      or just exploring an idea,<br />
+      I'd be happy to hear from you.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:hafidkrntn@gmail.com" class="contact-link">Email me &rarr;</a>
+      {socialLinks.map((link) => (
+        <a href={link.href} target="_blank" rel="noopener noreferrer" class="contact-link">
+          {link.label} &rarr;
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer fade-in stagger-2">
+  <div class="footer-inner">
+    <p class="footer-credit">Designed &amp; Engineered by</p>
+    <p class="footer-name">Muhamad Hafid Kurnianton</p>
+    <p class="footer-colophon">HKLABS &copy; {year}</p>
+  </div>
+</footer>
+
+<style>
+  .contact-section {
+    padding: var(--space-12) var(--space-5);
+    max-width: var(--content-wide);
+    margin: 0 auto;
+  }
+
+  .contact-heading {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-5);
+  }
+
+  .contact-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-7);
+    max-width: var(--content-narrow);
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .contact-link {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    width: fit-content;
+    transition: color var(--transition), transform var(--transition);
+  }
+
+  .contact-link:hover {
+    color: var(--text-primary);
+    transform: translateX(4px);
+  }
+
+  .site-footer {
+    padding: var(--space-10) var(--space-5);
+    max-width: var(--content-wide);
+    margin: var(--space-12) auto 0;
+  }
+
+  .footer-inner {
+    padding-top: var(--space-7);
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-credit {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: var(--space-1);
+    letter-spacing: 0.02em;
+  }
+
+  .footer-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--space-5);
+  }
+
+  .footer-colophon {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 640px) {
+    .contact-section {
+      padding: var(--space-10) var(--space-5);
+    }
+
+    .site-footer {
+      padding: var(--space-8) var(--space-5);
+      margin-top: var(--space-10);
+    }
+  }
+</style>

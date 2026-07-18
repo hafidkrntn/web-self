@@ -1,0 +1,362 @@
+---
+import BrowserFrame from "./BrowserFrame.astro";
+import DeviceFrame from "./DeviceFrame.astro";
+
+const projects = [
+  {
+    id: "sito",
+    title: "SITO",
+    subtitle: "System Tracking Oil",
+    type: "mobile",
+    image: "/images/projects/sito.webp",
+    role: "Software Engineer — Product Planning, UI/UX, Frontend, Backend, Database, Deployment",
+    problem:
+      "Most riders estimate oil replacement manually, which often results in replacing oil too early or too late. There is no simple application focused on personalized maintenance reminders.",
+    solution:
+      "Built as a mobile-first Progressive Web App using Astro for the frontend and Go for the backend with PostgreSQL as the database. Designed with a scalable architecture to support future features such as push notifications, maintenance history, and analytics.",
+    highlights: [
+      "Mobile-first PWA with Astro frontend and Go backend",
+      "PostgreSQL-backed architecture designed for scalability",
+      "Engineered to support push notifications, maintenance history, and analytics",
+    ],
+    stack: ["Astro", "Go", "PostgreSQL"],
+    outcome:
+      "Focused on balancing simplicity with scalability. The architecture is prepared for future growth while remaining easy to use.",
+    link: null,
+    demo: null,
+  },
+  {
+    id: "erp",
+    title: "ERP Platform",
+    subtitle: "Purchasing, Sales, Inventory, Finance, and Reporting",
+    type: "web",
+    image: "/images/projects/erp.webp",
+    role: "Software Engineer / Technical Lead — Frontend, Backend, Database, Infrastructure, Deployment, Architecture",
+    problem:
+      "The company required an integrated platform to streamline business processes, reduce manual work, and improve operational efficiency across multiple departments including purchasing, sales, inventory, warehouse management, distribution, finance, and reporting.",
+    solution:
+      "Built modular REST APIs using Go with PostgreSQL, Docker, Redis, and Linux. Focused on maintainability, performance optimization, clean database design, and scalable architecture.",
+    highlights: [
+      "Modular REST API architecture with Go and PostgreSQL",
+      "Containerized deployment with Docker and Redis",
+      "Performance optimization through clean database design",
+    ],
+    stack: ["Go", "PostgreSQL", "Docker", "Redis", "Linux"],
+    outcome:
+      "Improved application performance, standardized development practices, and built a maintainable system that supports long-term business growth.",
+    link: null,
+    demo: null,
+  },
+  {
+    id: "denext",
+    title: "Denext",
+    subtitle: "Corporate Website for IT Consulting",
+    type: "web",
+    image: "/images/projects/denext.webp",
+    role: "Software Engineer — Redesign, Responsiveness, Accessibility, SEO, Performance",
+    problem:
+      "The previous website lacked a clear visual hierarchy and did not effectively communicate the company's services.",
+    solution:
+      "Rebuilt with semantic HTML, modern CSS, and lightweight JavaScript, focusing on accessibility, responsive layouts, and Core Web Vitals.",
+    highlights: [
+      "Semantic HTML with modern CSS architecture",
+      "Lightweight JavaScript for optimal performance",
+      "Accessibility, responsive layouts, and Core Web Vitals optimization",
+    ],
+    stack: ["HTML", "CSS", "JavaScript"],
+    outcome:
+      "Delivered a cleaner user experience with improved responsiveness, maintainability, and website performance.",
+    link: null,
+    demo: "https://denext.id",
+  },
+  {
+    id: "toko-emas",
+    title: "Toko Emas Roma",
+    subtitle: "Business Website with Technical SEO",
+    type: "web",
+    image: null,
+    role: "Software Engineer — Frontend, SEO, Performance",
+    problem:
+      "The business needed a modern website that could improve discoverability on search engines while remaining fast and easy to maintain.",
+    solution:
+      "Built with a strong focus on semantic HTML, structured metadata, responsive design, technical SEO, and Core Web Vitals optimization.",
+    highlights: [
+      "Semantic HTML with structured metadata for SEO",
+      "Technical SEO and Core Web Vitals optimization",
+      "Responsive design for all devices",
+    ],
+    stack: ["HTML", "CSS", "JavaScript"],
+    outcome:
+      "Successfully improved search engine visibility through technical SEO best practices while maintaining a fast and lightweight user experience.",
+    link: null,
+    demo: null,
+  },
+];
+---
+
+<section id="work" class="projects-section">
+  <div class="section-header fade-in">
+    <h2 class="section-label">Featured Projects</h2>
+  </div>
+  <div class="projects-list">
+    {projects.map((project, idx) => (
+      <article class="project fade-in">
+        <div class="project-divider"></div>
+        <div class={"project-layout" + (idx % 2 === 0 ? "" : " project-layout--reverse")}>
+          <div class="project-visual">
+            {project.type === "mobile" ? (
+              <DeviceFrame src={project.image || undefined} alt={`${project.title} screenshot`} />
+            ) : (
+              <BrowserFrame
+                src={project.image || undefined}
+                alt={`${project.title} screenshot`}
+                url={project.demo || project.id + ".dev"}
+              />
+            )}
+          </div>
+          <div class="project-content">
+            <span class="project-number">0{idx + 1}</span>
+            <h3 class="project-title">{project.title}</h3>
+            <p class="project-subtitle">{project.subtitle}</p>
+
+            <div class="project-intro">
+              <p>{project.role}</p>
+            </div>
+
+            <div class="project-section">
+              <h4 class="section-heading">Problem</h4>
+              <p class="section-text">{project.problem}</p>
+            </div>
+
+            <div class="project-section">
+              <h4 class="section-heading">Solution</h4>
+              <p class="section-text">{project.solution}</p>
+            </div>
+
+            <div class="project-section">
+              <h4 class="section-heading">Engineering Highlights</h4>
+              <ul class="highlight-list">
+                {project.highlights.map((h) => (
+                  <li class="highlight-item">{h}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="project-stack">
+              <h4 class="section-heading">Stack</h4>
+              <p class="section-text">{project.stack.join(" · ")}</p>
+            </div>
+
+            <div class="project-section">
+              <h4 class="section-heading">Outcome</h4>
+              <p class="section-text">{project.outcome}</p>
+            </div>
+
+            {project.link || project.demo ? (
+              <div class="project-actions">
+                {project.link && (
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" class="action-link">
+                    Source Code
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                  </a>
+                )}
+                {project.demo && (
+                  <a href={project.demo} target="_blank" rel="noopener noreferrer" class="action-link">
+                    Live Site
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                    </svg>
+                  </a>
+                )}
+              </div>
+            ) : null}
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    padding: var(--space-10) var(--space-5);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .project {
+    padding: var(--space-9) 0;
+  }
+
+  .project-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin-bottom: var(--space-9);
+  }
+
+  .project:first-child .project-divider {
+    display: none;
+  }
+
+  .project-layout {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .project-layout--reverse {
+    direction: rtl;
+  }
+
+  .project-layout--reverse .project-content {
+    direction: ltr;
+  }
+
+  .project-content {
+    padding-top: var(--space-3);
+  }
+
+  .project-number {
+    display: inline-block;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+    letter-spacing: 0.08em;
+  }
+
+  .project-title {
+    margin-bottom: var(--space-2);
+    transition: color var(--transition);
+  }
+
+  .project:hover .project-title {
+    color: var(--accent);
+  }
+
+  .project-subtitle {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-6);
+  }
+
+  .project-intro {
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project-intro p {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .project-section {
+    margin-bottom: var(--space-6);
+  }
+
+  .section-heading {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .section-text {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .highlight-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .highlight-item {
+    position: relative;
+    padding-left: var(--space-4);
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--space-1);
+  }
+
+  .highlight-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--text-muted);
+  }
+
+  .project-stack {
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project-actions {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  .action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color var(--transition), gap var(--transition);
+  }
+
+  .action-link:hover {
+    color: var(--accent);
+    gap: var(--space-2);
+  }
+
+  .action-link svg {
+    transition: transform var(--transition);
+  }
+
+  .action-link:hover svg {
+    transform: translate(2px, -2px);
+  }
+
+  @media (max-width: 900px) {
+    .project-layout,
+    .project-layout--reverse {
+      grid-template-columns: 1fr;
+      direction: ltr;
+      gap: var(--space-6);
+    }
+
+    .project-visual {
+      max-width: 600px;
+    }
+  }
+</style>

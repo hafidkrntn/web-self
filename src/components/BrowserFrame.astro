@@ -1,0 +1,152 @@
+---
+interface Props {
+  src?: string;
+  alt?: string;
+  url?: string;
+}
+
+const { src, alt, url } = Astro.props;
+---
+
+<div class="browser-frame" data-state={src ? "ready" : "empty"}>
+  <div class="browser-bar">
+    <div class="browser-dots">
+      <span class="browser-dot browser-dot--red"></span>
+      <span class="browser-dot browser-dot--yellow"></span>
+      <span class="browser-dot browser-dot--green"></span>
+    </div>
+    <div class="browser-url">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+        <path d="M2 12h20"/>
+        <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+      </svg>
+      <span>{url || "project.url"}</span>
+    </div>
+  </div>
+  <div class="browser-body">
+    {src ? (
+      <img
+        src={src}
+        alt={alt || ""}
+        loading="lazy"
+        decoding="async"
+        class="browser-image"
+        onload="this.classList.add('loaded')"
+        onerror="this.style.display='none';this.parentElement.querySelector('.browser-fallback').style.display='flex'"
+      />
+    ) : null}
+    <div class="browser-fallback" style="display: {src ? 'none' : 'flex'}">
+      <span class="fallback-text">Screenshot Coming Soon</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .browser-frame {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-secondary);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  }
+
+  .browser-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .browser-dots {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .browser-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .browser-dot--red {
+    background: #ff5f56;
+  }
+
+  .browser-dot--yellow {
+    background: #ffbd2e;
+  }
+
+  .browser-dot--green {
+    background: #27c93f;
+  }
+
+  .browser-url {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 1;
+    padding: var(--space-1) var(--space-3);
+    background: var(--border);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .browser-url svg {
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  .browser-url span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .browser-body {
+    position: relative;
+    background: var(--bg-secondary);
+    line-height: 0;
+  }
+
+  .browser-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 500ms var(--ease-out-expo),
+                transform 500ms var(--ease-out-expo);
+  }
+
+  .browser-image.loaded {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .browser-frame[data-state="ready"]:hover .browser-image.loaded {
+    transform: scale(1.008);
+  }
+
+  .browser-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+    padding: var(--space-8) var(--space-4);
+    background: var(--bg-primary);
+  }
+
+  .fallback-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+</style>

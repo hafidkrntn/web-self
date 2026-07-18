@@ -1,0 +1,204 @@
+---
+---
+
+<section id="approach" class="approach-section">
+  <div class="approach-inner">
+    <div class="approach-block approach-header fade-in stagger-1">
+      <span class="approach-kicker">Approach</span>
+    </div>
+
+    <div class="approach-block fade-in stagger-2">
+      <p class="approach-statement">
+        I build software<br />
+        that solves problems<br />
+        without creating new ones.
+      </p>
+    </div>
+
+    <div class="approach-rule"></div>
+
+    <div class="approach-block fade-in stagger-3">
+      <div class="approach-body">
+        <p>
+          I don't build software to use interesting technology. I build it to
+          solve real problems. An app that helps riders maintain their
+          motorcycles. A platform that replaces manual processes with
+          integrated workflows. A website that communicates clearly and
+          loads fast.
+        </p>
+        <p>
+          Every decision is a tradeoff. The right database, the right level of
+          abstraction, the right amount of code. I prefer code that's
+          predictable — easy to understand, easy to change, and easy to
+          trust. Code that's boring ships faster, breaks less, and lasts
+          longer.
+        </p>
+      </div>
+    </div>
+
+    <div class="approach-rule"></div>
+
+    <div class="approach-block fade-in stagger-4">
+      <span class="principles-kicker">Principles</span>
+      <div class="approach-principles">
+        <div class="principle">
+          <span class="principle-number">01</span>
+          <p class="principle-text">Understand the problem.</p>
+        </div>
+        <div class="principle">
+          <span class="principle-number">02</span>
+          <p class="principle-text">Keep it simple.</p>
+        </div>
+        <div class="principle">
+          <span class="principle-number">03</span>
+          <p class="principle-text">Build to last.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .approach-section {
+    background: #f7f6f3;
+    padding: var(--space-11) 0;
+    width: 100%;
+  }
+
+  .approach-inner {
+    max-width: var(--content-wide);
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+  }
+
+  .approach-block {
+    margin-bottom: var(--space-10);
+  }
+
+  .approach-block:last-child {
+    margin-bottom: 0;
+  }
+
+  .approach-header {
+    text-align: right;
+  }
+
+  .approach-kicker {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+  }
+
+  .approach-statement {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    max-width: 840px;
+  }
+
+  .approach-rule {
+    width: 36px;
+    height: 1px;
+    background: #c8c6c0;
+    margin: var(--space-10) 0;
+  }
+
+  .approach-body {
+    max-width: var(--content-narrow);
+  }
+
+  .approach-body p {
+    font-size: 1.0625rem;
+    line-height: 1.85;
+    color: var(--text-secondary);
+  }
+
+  .approach-body p:first-child::first-letter {
+    float: left;
+    font-size: 3.5em;
+    font-weight: 500;
+    line-height: 0.8;
+    margin-right: 0.125em;
+    padding-top: 0.05em;
+    color: var(--text-primary);
+  }
+
+  .approach-body p + p {
+    margin-top: var(--space-5);
+  }
+
+  .principles-kicker {
+    display: block;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-6);
+  }
+
+  .approach-principles {
+    max-width: var(--content-narrow);
+  }
+
+  .principle {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-5);
+    margin-bottom: var(--space-5);
+  }
+
+  .principle:last-child {
+    margin-bottom: 0;
+  }
+
+  .principle-number {
+    flex-shrink: 0;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-muted);
+    letter-spacing: 0.03em;
+    width: 1.5em;
+    text-align: right;
+  }
+
+  .principle-text {
+    font-size: 1.25rem;
+    font-weight: 450;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 640px) {
+    .approach-section {
+      padding: var(--space-9) 0;
+    }
+
+    .approach-block {
+      margin-bottom: var(--space-8);
+    }
+
+    .approach-rule {
+      margin: var(--space-8) 0;
+    }
+
+    .approach-statement {
+      font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .principle {
+      gap: var(--space-4);
+    }
+
+    .principle-text {
+      font-size: 1.125rem;
+    }
+  }
+</style>

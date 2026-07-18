@@ -1,0 +1,123 @@
+---
+interface Props {
+  src?: string;
+  alt?: string;
+}
+
+const { src, alt } = Astro.props;
+---
+
+<div class="device-wrapper" data-state={src ? "ready" : "empty"}>
+  <div class="device-frame">
+    <div class="device-notch">
+      <span class="device-notch-dot"></span>
+    </div>
+    <div class="device-screen">
+      {src ? (
+        <img
+          src={src}
+          alt={alt || ""}
+          loading="lazy"
+          decoding="async"
+          class="device-image"
+          onload="this.classList.add('loaded')"
+          onerror="this.style.display='none';this.parentElement.querySelector('.device-fallback').style.display='flex'"
+        />
+      ) : null}
+      <div class="device-fallback" style="display: {src ? 'none' : 'flex'}">
+        <span class="fallback-text">Screenshot Coming Soon</span>
+      </div>
+    </div>
+    <div class="device-home">
+      <span class="device-home-indicator"></span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .device-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-4) 0;
+  }
+
+  .device-frame {
+    width: min(100%, 320px);
+    border: 3px solid var(--text-primary);
+    border-radius: 32px;
+    overflow: hidden;
+    background: var(--bg-primary);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .device-notch {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-3) 0 var(--space-2);
+    background: var(--text-primary);
+  }
+
+  .device-notch-dot {
+    width: 48px;
+    height: 5px;
+    background: var(--text-primary);
+    border-radius: 999px;
+    opacity: 0.3;
+  }
+
+  .device-screen {
+    position: relative;
+    background: var(--bg-secondary);
+    line-height: 0;
+  }
+
+  .device-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 500ms var(--ease-out-expo),
+                transform 500ms var(--ease-out-expo);
+  }
+
+  .device-image.loaded {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .device-wrapper[data-state="ready"]:hover .device-image.loaded {
+    transform: scale(1.008);
+  }
+
+  .device-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 380px;
+    padding: var(--space-8) var(--space-4);
+    background: var(--bg-primary);
+  }
+
+  .fallback-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .device-home {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-2) 0 var(--space-3);
+    background: var(--bg-primary);
+  }
+
+  .device-home-indicator {
+    width: 120px;
+    height: 4px;
+    background: var(--text-primary);
+    border-radius: 999px;
+    opacity: 0.15;
+  }
+</style>

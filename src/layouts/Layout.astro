@@ -1,105 +1,98 @@
 ---
-/**
- * Layout.astro
- * Main layout with smooth scroll and 3D scene
- */
 import "../styles/global.css";
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-		<!-- SEO Meta Tags -->
-		<title>Hafid | Adaptive Developer</title>
-		<meta
-			name="description"
-			content="I'm an Adaptive Developer who enjoys building efficient, scalable applications and learning new technologies to improve code quality and usability."
-		/>
-		<meta name="author" content="Hafid" />
+    <title>Muhamad Hafid Kurnianton — Software Engineer</title>
+    <meta
+      name="description"
+      content="Software engineer building efficient, scalable applications with modern technologies."
+    />
+    <meta name="author" content="Muhamad Hafid Kurnianton" />
 
-		<!-- Open Graph -->
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content="Hafid | Adaptive Developer" />
-		<meta
-			property="og:description"
-			content="Building efficient, scalable applications with modern technologies."
-		/>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Muhamad Hafid Kurnianton — Software Engineer" />
+    <meta
+      property="og:description"
+      content="Software engineer building efficient, scalable applications with modern technologies."
+    />
 
-		<!-- Preconnect to external resources -->
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-		<meta name="generator" content={Astro.generator} />
-	</head>
-	<body>
-		<!-- Scroll Progress Bar -->
-		<div class="scroll-progress" id="scroll-progress"></div>
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <slot />
 
-		<slot />
+    <a href="#home" class="skip-link">Skip to content</a>
 
-		<!-- Smooth Scroll Initialization -->
-		<script>
-			import Lenis from "lenis";
-			import { gsap } from "gsap";
-			import { ScrollTrigger } from "gsap/ScrollTrigger";
+    <script>
+      (function() {
+        var reduceMotion = !window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
 
-			gsap.registerPlugin(ScrollTrigger);
+        function init() {
+          document.body.classList.add('loaded');
 
-			// Initialize Lenis smooth scroll
-			const lenis = new Lenis({
-				duration: 1.2,
-				easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-				orientation: "vertical",
-				gestureOrientation: "vertical",
-				smoothWheel: true,
-				wheelMultiplier: 1,
-				touchMultiplier: 2,
-			});
+          if (reduceMotion) {
+            var fadeEls = document.querySelectorAll('.fade-in');
+            for (var i = 0; i < fadeEls.length; i++) {
+              fadeEls[i].classList.add('visible');
+            }
+            return;
+          }
 
-			// Connect Lenis to GSAP ScrollTrigger
-			lenis.on("scroll", ScrollTrigger.update);
+          if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function(entries) {
+              entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+                }
+              });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-			gsap.ticker.add((time) => {
-				lenis.raf(time * 1000);
-			});
+            document.querySelectorAll('.fade-in').forEach(function(el) {
+              observer.observe(el);
+            });
+          } else {
+            document.querySelectorAll('.fade-in').forEach(function(el) {
+              el.classList.add('visible');
+            });
+          }
+        }
 
-			gsap.ticker.lagSmoothing(0);
-
-			// Scroll progress bar
-			const scrollProgress = document.getElementById("scroll-progress");
-
-			window.addEventListener("scroll", () => {
-				const scrollTop =
-					document.documentElement.scrollTop || document.body.scrollTop;
-				const scrollHeight =
-					document.documentElement.scrollHeight -
-					document.documentElement.clientHeight;
-				const progress = (scrollTop / scrollHeight) * 100;
-
-				if (scrollProgress) {
-					scrollProgress.style.width = `${progress}%`;
-				}
-			});
-
-			// Page load animation
-			document.body.classList.add("loaded");
-		</script>
-	</body>
+        if (document.readyState === 'complete') {
+          init();
+        } else {
+          window.addEventListener('load', init);
+        }
+      })();
+    </script>
+  </body>
 </html>
 
 <style is:global>
-	/* Page load transition */
-	body {
-		opacity: 0;
-		transition: opacity 0.5s ease;
-	}
+  .skip-link {
+    position: fixed;
+    top: -100%;
+    left: var(--space-4);
+    padding: var(--space-2) var(--space-4);
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    z-index: 999;
+    border-radius: 4px;
+    transition: top var(--transition);
+  }
 
-	body.loaded {
-		opacity: 1;
-	}
+  .skip-link:focus {
+    top: var(--space-4);
+  }
 </style>
