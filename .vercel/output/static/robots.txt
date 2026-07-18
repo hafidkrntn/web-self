@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://hklabs.site/sitemap-index.xml
