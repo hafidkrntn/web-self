@@ -24,7 +24,7 @@ const { src, alt } = Astro.props;
           onerror="this.style.display='none';this.parentElement.querySelector('.device-fallback').style.display='flex'"
         />
       ) : null}
-      <div class="device-fallback" style="display: {src ? 'none' : 'flex'}">
+      <div class="device-fallback" style={`display: ${src ? 'none' : 'flex'}`}>
         <span class="fallback-text">Screenshot Coming Soon</span>
       </div>
     </div>

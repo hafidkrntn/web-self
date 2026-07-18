@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -8,6 +10,7 @@ import "../styles/global.css";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
 
     <title>Muhamad Hafid Kurnianton — Software Engineer</title>
     <meta
@@ -17,6 +20,7 @@ import "../styles/global.css";
     <meta name="author" content="Muhamad Hafid Kurnianton" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content="Muhamad Hafid Kurnianton — Software Engineer" />
     <meta
       property="og:description"

@@ -9,7 +9,7 @@ const links = [
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="#home" class="nav-logo">HK</a>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       {links.map(link => (
         <a href={link.href} class="nav-link" data-section={link.href.slice(1)}>{link.label}</a>
       ))}

@@ -36,3 +36,12 @@ I’m keeping everything lightweight and easy to maintain.
 ```bash
 npm install
 npm run dev
+```
+
+Other useful scripts:
+
+```bash
+npm run build     # build the static site into dist/
+npm run preview   # preview the built site locally
+npm run check     # run astro check (type & a11y diagnostics)
+```
