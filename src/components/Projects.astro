@@ -70,92 +70,93 @@ const projects = [
     demo: "https://denext.id",
   },
   {
-  id: "toko-emas",
-  title: "Toko Emas Roma",
-  subtitle: "Business Website with Technical SEO",
-  type: "web",
-  image: "/images/projects/toko-emas.webp",
-  role: "Software Engineer — Frontend, SEO, Performance",
-  problem:
-    "The client needed a modern business website that could improve online visibility, load quickly across devices, and rank competitively on search engines.",
-  solution:
-    "Developed the website using Next.js and Tailwind CSS with a strong emphasis on technical SEO. Implemented semantic HTML, metadata optimization, structured data, responsive layouts, and performance best practices to achieve excellent Core Web Vitals.",
-  highlights: [
-    "Built with Next.js App Router and Tailwind CSS",
-    "Technical SEO with metadata, sitemap, robots.txt, and structured data",
-    "Optimized Core Web Vitals and page performance",
-    "Responsive design across desktop, tablet, and mobile",
-  ],
-  stack: [
-    "Next.js",
-    "React",
-    "Tailwind CSS",
-    "TypeScript"
-  ],
-  outcome:
-    "Delivered a fast, SEO-friendly business website that ranks highly for relevant search keywords while providing a smooth experience across all devices.",
-  link: null,
-  demo: "https://www.tokomasroma.com/",
-},
+    id: "toko-emas",
+    title: "Toko Emas Roma",
+    subtitle: "Business Website with Technical SEO",
+    type: "web",
+    image: "/images/projects/toko-emas.webp",
+    role: "Software Engineer — Frontend, SEO, Performance",
+    problem:
+      "The client needed a modern business website that could improve online visibility, load quickly across devices, and rank competitively on search engines.",
+    solution:
+      "Developed the website using Next.js and Tailwind CSS with a strong emphasis on technical SEO. Implemented semantic HTML, metadata optimization, structured data, responsive layouts, and performance best practices to achieve excellent Core Web Vitals.",
+    highlights: [
+      "Built with Next.js App Router and Tailwind CSS",
+      "Technical SEO with metadata, sitemap, robots.txt, and structured data",
+      "Optimized Core Web Vitals and page performance",
+      "Responsive design across desktop, tablet, and mobile",
+    ],
+    stack: ["Next.js", "React", "Tailwind CSS", "TypeScript"],
+    outcome:
+      "Delivered a fast, SEO-friendly business website that ranks highly for relevant search keywords while providing a smooth experience across all devices.",
+    link: null,
+    demo: "https://www.tokomasroma.com/",
+  },
 ];
 ---
 
-<section id="work" class="projects-section">
-  <div class="section-header fade-in">
-    <h2 class="section-label">Featured Projects</h2>
-  </div>
-  <div class="projects-list">
+<section id="work" class="projects-section fade-in">
+  <div class="projects-inner">
+    <span class="section-number">02</span>
+    <h2 class="label projects-label">Featured Projects</h2>
+    <p class="section-desc">Selected work. No shared theme. No shared stack.</p>
+    <div class="rule"></div>
+
     {projects.map((project, idx) => (
-      <article class="project fade-in">
-        <div class="project-divider"></div>
-        <div class={"project-layout" + (idx % 2 === 0 ? "" : " project-layout--reverse")}>
-          <div class="project-visual">
-            {project.type === "mobile" ? (
-              <DeviceFrame src={project.image || undefined} alt={`${project.title} screenshot`} />
-            ) : (
-              <BrowserFrame
-                src={project.image || undefined}
-                alt={`${project.title} screenshot`}
-                url={project.demo || project.id + ".dev"}
-              />
-            )}
-          </div>
+      <article class="project">
+        <span class="project-number">{(idx + 1).toString().padStart(3, '0')}</span>
+        <div class="project-layout">
+          {project.image ? (
+            <div class="project-visual">
+              {project.type === "mobile" ? (
+                <DeviceFrame src={project.image} alt={`${project.title} screenshot`} />
+              ) : (
+                <BrowserFrame
+                  src={project.image}
+                  alt={`${project.title} screenshot`}
+                  url={project.demo || project.id + ".dev"}
+                />
+              )}
+            </div>
+          ) : null}
           <div class="project-content">
-            <span class="project-number">0{idx + 1}</span>
             <h3 class="project-title">{project.title}</h3>
-            <p class="project-subtitle">{project.subtitle}</p>
+            {project.subtitle ? <p class="project-subtitle label">{project.subtitle}</p> : null}
+            <p class="project-role">{project.role}</p>
 
-            <div class="project-intro">
-              <p>{project.role}</p>
+            <div class="rule--mini"></div>
+
+            <div class="project-detail">
+              <span class="detail-label label">Problem</span>
+              <p class="detail-text">{project.problem}</p>
             </div>
 
-            <div class="project-section">
-              <h4 class="section-heading">Problem</h4>
-              <p class="section-text">{project.problem}</p>
+            <div class="project-detail">
+              <span class="detail-label label">Solution</span>
+              <p class="detail-text">{project.solution}</p>
             </div>
 
-            <div class="project-section">
-              <h4 class="section-heading">Solution</h4>
-              <p class="section-text">{project.solution}</p>
-            </div>
-
-            <div class="project-section">
-              <h4 class="section-heading">Engineering Highlights</h4>
-              <ul class="highlight-list">
+            <div class="project-detail">
+              <span class="detail-label label">Highlights</span>
+              <ul class="detail-list">
                 {project.highlights.map((h) => (
-                  <li class="highlight-item">{h}</li>
+                  <li class="detail-item">{h}</li>
                 ))}
               </ul>
             </div>
 
-            <div class="project-stack">
-              <h4 class="section-heading">Stack</h4>
-              <p class="section-text">{project.stack.join(" · ")}</p>
+            <div class="project-detail">
+              <span class="detail-label label">Stack</span>
+              <div class="project-tags">
+                {project.stack.map((tech) => (
+                  <span class="tag">{tech}</span>
+                ))}
+              </div>
             </div>
 
-            <div class="project-section">
-              <h4 class="section-heading">Outcome</h4>
-              <p class="section-text">{project.outcome}</p>
+            <div class="project-detail">
+              <span class="detail-label label">Outcome</span>
+              <p class="detail-text">{project.outcome}</p>
             </div>
 
             {project.link || project.demo ? (
@@ -163,7 +164,7 @@ const projects = [
                 {project.link && (
                   <a href={project.link} target="_blank" rel="noopener noreferrer" class="action-link">
                     Source Code
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M7 17L17 7M17 7H7M17 7V17"/>
                     </svg>
                   </a>
@@ -171,7 +172,7 @@ const projects = [
                 {project.demo && (
                   <a href={project.demo} target="_blank" rel="noopener noreferrer" class="action-link">
                     Live Site
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
                     </svg>
                   </a>
@@ -187,119 +188,97 @@ const projects = [
 
 <style>
   .projects-section {
-    padding: var(--space-10) var(--space-5);
-    max-width: 1100px;
+    padding: var(--space-9) var(--space-5);
+    max-width: var(--content-full);
     margin: 0 auto;
   }
 
-  .section-header {
-    margin-bottom: var(--space-8);
+  .projects-label {
+    margin-bottom: var(--space-3);
   }
 
-  .section-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-muted);
+  .section-desc {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
   }
 
   .project {
-    padding: var(--space-9) 0;
+    margin-top: var(--space-9);
+    padding-top: var(--space-9);
+    border-top: 1px solid var(--border);
   }
 
-  .project-divider {
-    width: 100%;
-    height: 1px;
-    background: var(--border);
-    margin-bottom: var(--space-9);
+  .project:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
   }
 
-  .project:first-child .project-divider {
-    display: none;
+  .project-number {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-5);
+    font-style: normal;
+    font-variant-numeric: tabular-nums;
   }
 
   .project-layout {
     display: grid;
-    grid-template-columns: 55% 45%;
+    grid-template-columns: 1fr 1fr;
     gap: var(--space-8);
     align-items: start;
   }
 
-  .project-layout--reverse {
-    direction: rtl;
-  }
-
-  .project-layout--reverse .project-content {
-    direction: ltr;
+  .project-visual {
+    max-width: 100%;
   }
 
   .project-content {
-    padding-top: var(--space-3);
-  }
-
-  .project-number {
-    display: inline-block;
-    font-size: 0.6875rem;
-    font-weight: 500;
-    font-variant-numeric: tabular-nums;
-    color: var(--text-muted);
-    margin-bottom: var(--space-4);
-    letter-spacing: 0.08em;
+    padding-top: var(--space-1);
   }
 
   .project-title {
     margin-bottom: var(--space-2);
-    transition: color var(--transition);
-  }
-
-  .project:hover .project-title {
-    color: var(--accent);
   }
 
   .project-subtitle {
+    margin-bottom: var(--space-4);
+    display: block;
+  }
+
+  .project-role {
     font-size: 0.9375rem;
-    color: var(--text-muted);
-    margin-bottom: var(--space-6);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 0;
   }
 
-  .project-intro {
-    margin-bottom: var(--space-6);
-    padding-bottom: var(--space-6);
-    border-bottom: 1px solid var(--border);
+  .project-detail {
+    margin-top: var(--space-6);
   }
 
-  .project-intro p {
+  .detail-label {
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .detail-text {
     font-size: 0.9375rem;
     color: var(--text-secondary);
     line-height: 1.7;
   }
 
-  .project-section {
-    margin-bottom: var(--space-6);
-  }
-
-  .section-heading {
-    font-size: 0.6875rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
-    margin-bottom: var(--space-3);
-  }
-
-  .section-text {
-    font-size: 0.9375rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-  }
-
-  .highlight-list {
+  .detail-list {
     list-style: none;
     padding: 0;
   }
 
-  .highlight-item {
+  .detail-item {
     position: relative;
     padding-left: var(--space-4);
     font-size: 0.9375rem;
@@ -308,7 +287,7 @@ const projects = [
     margin-bottom: var(--space-1);
   }
 
-  .highlight-item::before {
+  .detail-item::before {
     content: "";
     position: absolute;
     left: 0;
@@ -319,15 +298,30 @@ const projects = [
     background: var(--text-muted);
   }
 
-  .project-stack {
-    margin-bottom: var(--space-6);
-    padding-bottom: var(--space-6);
-    border-bottom: 1px solid var(--border);
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: var(--space-1) var(--space-3);
+    background: oklch(0.94 0.005 85);
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+    font-style: normal;
   }
 
   .project-actions {
     display: flex;
     gap: var(--space-6);
+    margin-top: var(--space-7);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border);
   }
 
   .action-link {
@@ -354,15 +348,13 @@ const projects = [
   }
 
   @media (max-width: 900px) {
-    .project-layout,
-    .project-layout--reverse {
+    .project-layout {
       grid-template-columns: 1fr;
-      direction: ltr;
       gap: var(--space-6);
     }
 
     .project-visual {
-      max-width: 600px;
+      max-width: 500px;
     }
   }
 </style>

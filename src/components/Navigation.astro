@@ -6,7 +6,7 @@ const links = [
 ];
 ---
 
-<nav class="nav" id="nav">
+<nav class="nav">
   <div class="nav-inner">
     <a href="#home" class="nav-logo">HK</a>
     <div class="nav-links" id="nav-links">
@@ -19,17 +19,10 @@ const links = [
 
 <script>
   (function() {
-    var nav = document.getElementById('nav');
-    var ticking = false;
-
     var navLinks = document.querySelectorAll('.nav-link');
-    var sections = /** @type {NodeListOf<HTMLElement>} */ (document.querySelectorAll('section[id]'));
+    var sections = document.querySelectorAll('section[id]');
 
     function onScroll() {
-      if (nav) {
-        nav.classList.toggle('nav--scrolled', window.scrollY > 50);
-      }
-
       var scrollPos = window.scrollY + 100;
       var activeId: string | null = null;
 
@@ -51,10 +44,15 @@ const links = [
 
       navLinks.forEach(function(link) {
         var section = link.getAttribute('data-section');
-        link.classList.toggle('nav-link--active', section === activeId);
+        if (section === activeId) {
+          link.classList.add('nav-link--active');
+        } else {
+          link.classList.remove('nav-link--active');
+        }
       });
     }
 
+    var ticking = false;
     window.addEventListener('scroll', function() {
       if (!ticking) {
         requestAnimationFrame(function() {
@@ -71,34 +69,27 @@ const links = [
 
 <style>
   .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    padding: var(--space-4) 0;
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border);
-    transition: box-shadow var(--transition);
-  }
-
-  .nav--scrolled {
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    width: 100%;
   }
 
   .nav-inner {
     max-width: var(--content-wide);
     margin: 0 auto;
-    padding: 0 var(--space-5);
+    padding: var(--space-4) var(--space-5);
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
   .nav-logo {
-    font-size: 1.125rem;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
     font-weight: 700;
+    font-style: italic;
     letter-spacing: -0.02em;
+    color: var(--text-primary);
   }
 
   .nav-links {
@@ -107,17 +98,21 @@ const links = [
   }
 
   .nav-link {
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
     position: relative;
-    transition: color var(--transition);
+    padding-bottom: 2px;
+    font-style: normal;
   }
 
   .nav-link::after {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: 0;
     left: 0;
     width: 0;
     height: 1px;
@@ -143,7 +138,11 @@ const links = [
 
   @media (max-width: 640px) {
     .nav-links {
-      display: none;
+      gap: var(--space-4);
+    }
+
+    .nav-link {
+      font-size: 0.75rem;
     }
   }
 </style>
